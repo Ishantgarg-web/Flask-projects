@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="static/css/style.css">
+  </head>
+  
+  <body>
+    
+    <section class="header">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">
+                <img src="static/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                TodoAPP
+            </a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  </li>
+              </div>
+            </div>
+          </nav>
+    </section>
+
+    <section class="todo__form" id="create_todo">
+      <h2 class="todo__form__heading">Create New TODO</h2>
+      <form method="POST" action="/">
+        <div class="mb-3">
+          <label for="todotitle" class="form-label todo__form__title__heading">Enter Todo Title:</label>
+          <input type="text" class="form-control" id="todotitle" name="todo_title">
+        </div>
+        <div class="mb-3">
+          <label for="tododesc" class="form-label todo__form__title__heading">Enter Todo Description:</label>
+          <input type="text" class="form-control" id="tododesc" name="todo_desc">
+        </div>
+        <button type="submit" class="btn btn-primary todo__form__btn">Add new TODO</button>
+      </form>
+
+
+    </section>
+
+    <section class="recent__todo" id="see_todo">
+      <h2 class="recent__todo__heading">Recent Todos</h2>
+        {% set num_todos = todos | length %}
+        {% if num_todos>0 %}
+          <table class="table table-striped recent__todo__table">
+            <thead>
+              <tr class="table-dark">
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for todo in todos %}
+                  <tr>
+                    <td class="recent__todo__table__todotitle" id="my-element">{{ todo['title'] }}</td>
+                    <td class="recent__todo__table__tododesc">{{ todo['desc'] }}</td>
+                    <td>
+                      <a href="/delete/{{ todo._id }}" type="button" class="btn btn-danger recent__todo__btn recent__todo__delete__btn">Delete</a>
+                      {% if todo['status']=='Complete' %}
+                        <a href="/complete/{{ todo._id }}" type="button" class="btn btn-success recent__todo__btn recent__todo__incomplete__btn">InComplete</a>
+                      {% else %}
+                        <a href="/complete/{{ todo._id }}" type="button" class="btn btn-success recent__todo__btn recent__todo__complete__btn">Complete</a>
+                      {% endif %}
+                    </td>
+                  </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+        {% else %} 
+          <h3 class="recent__todo__no__todos">There are no todos left!!</h3>
+        {% endif %}
+    </section>
+
+    <footer class="footer">
+      <div class="container footer_content">
+        <div class="row">
+          <div class="col-md-6 footer_col1">
+            <div class="row">
+              <div class="col-md-12">
+                <a href="#" class="footer_links">About me</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <a href="#" class="footer_links">See my other Projects</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 footer_col2">
+            <div class="row">
+              <div class="col-md-12">
+                <a href="#create_todo" class="footer_links">Create new todo</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <a href="#see_todo" class="footer_links">See all Todos</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>

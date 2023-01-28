@@ -1,0 +1,81 @@
+/***  Add todo   ***/
+.todo__form{
+    padding: 20px;
+    align-items: center;
+    background-color: rgb(230, 230, 230);
+}
+
+.todo__form__heading{
+    color: rgb(41, 130, 153);
+    margin-bottom: 30px;
+}
+
+.todo__form__title__heading{
+    color: rgb(41, 130, 153);
+    font-size: 20px;
+}
+
+.todo__form__btn{
+    display: block;
+    margin: 0 auto;
+}
+
+
+/******  RECENT TODOS  ********/
+
+.recent__todo{
+    padding: 20px;
+    align-items: center;
+}
+.recent__todo__table{
+    table-layout: fixed;
+}
+.recent__todo__heading{
+    color: rgb(41, 130, 153);
+    margin-bottom: 20px;
+}
+
+.recent__todo__table__todotitle{
+    font-weight: 500;
+    
+}
+td{
+    word-wrap: break-word;
+}
+
+.recent__todo__btn{
+    margin: 7px;
+}
+
+.recent__todo__no__todos{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.highlighted_row{
+    background-color: green;
+}
+
+
+/*******  FOOTER   ***********/
+.footer{
+    background-color: hsl(0, 2%, 30%);
+    height: auto;
+}
+
+.footer_content{
+    margin: 60px;
+    padding: 30px;
+    margin-bottom: 0px;
+    padding-bottom: 10px
+}
+
+.footer_links{
+    text-decoration: none;
+    color: #89ecaf;
+    font-size: 20px;
+    padding: 5px;   
+}
+
+.footer_links:hover{
+    color: hsl(124, 86%, 35%);
+}
