@@ -175,4 +175,4 @@ def incomplete(email, title, desc):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
