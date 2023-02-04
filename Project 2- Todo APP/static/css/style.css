@@ -39,6 +39,15 @@
     font-weight: 500;
     
 }
+
+.recent__todo__table__tododesc{
+    font-weight: 500;
+}
+
+.recent__todo__completed__todo{
+    background-color: #ccf4db;
+}
+
 td{
     word-wrap: break-word;
 }

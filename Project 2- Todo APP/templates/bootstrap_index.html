@@ -26,6 +26,20 @@
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                   </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      User Profile
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><p class="dropdown-item">User Email: {{ user_email }}</p></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li class="dropdown-item">
+                      <a class="btn btn-dark" href="{{ url_for('clear_session') }}">
+                          Logout
+                      </a>
+                      </li>
+                    </ul>
+                  </li>
               </div>
             </div>
           </nav>
@@ -62,23 +76,30 @@
             </thead>
             <tbody>
                 {% for todo in todos %}
-                  <tr>
-                    <td class="recent__todo__table__todotitle" id="my-element">{{ todo['title'] }}</td>
-                    <td class="recent__todo__table__tododesc">{{ todo['desc'] }}</td>
-                    <td>
-                      <a href="/delete/{{ todo._id }}" type="button" class="btn btn-danger recent__todo__btn recent__todo__delete__btn">Delete</a>
-                      {% if todo['status']=='Complete' %}
-                        <a href="/complete/{{ todo._id }}" type="button" class="btn btn-success recent__todo__btn recent__todo__incomplete__btn">InComplete</a>
-                      {% else %}
-                        <a href="/complete/{{ todo._id }}" type="button" class="btn btn-success recent__todo__btn recent__todo__complete__btn">Complete</a>
-                      {% endif %}
-                    </td>
-                  </tr>
+                    {% if todo['status']=='Complete' %}
+                      <tr class="recent__todo__completed__todo">
+                        <td class="recent__todo__table__todotitle" id="my-element">{{ todo['title'] }}</td>
+                        <td class="recent__todo__table__tododesc">{{ todo['description'] }}</td>
+                        <td>
+                          <a href="/delete/{{ user_email }}/{{ todo['title'] }}/{{ todo['description'] }}" type="button" class="btn btn-danger recent__todo__btn recent__todo__delete__btn">Delete</a>                          
+                          <a href="/InComplete/{{ user_email }}/{{ todo['title'] }}/{{ todo['description'] }}" type="button" class="btn btn-success recent__todo__btn recent__todo__incomplete__btn">InComplete</a>
+                        </td>
+                      </tr>
+                    {% else %}
+                      <tr>
+                        <td class="recent__todo__table__todotitle" id="my-element">{{ todo['title'] }}</td>
+                        <td class="recent__todo__table__tododesc">{{ todo['description'] }}</td>
+                        <td>
+                          <a href="/delete/{{ user_email }}/{{ todo['title'] }}/{{ todo['description'] }}" type="button" class="btn btn-danger recent__todo__btn recent__todo__delete__btn">Delete</a>                          
+                          <a href="/Complete/{{ user_email }}/{{ todo['title'] }}/{{ todo['description'] }}" type="button" class="btn btn-success recent__todo__btn recent__todo__incomplete__btn">Complete</a>
+                        </td>
+                      </tr>
+                    {% endif %}
                 {% endfor %}
             </tbody>
           </table>
         {% else %} 
-          <h3 class="recent__todo__no__todos">There are no todos left!!</h3>
+          <h3 class="recent__todo__no__todos">There are no todos left, Please ADD more Todos</h3>
         {% endif %}
     </section>
 
